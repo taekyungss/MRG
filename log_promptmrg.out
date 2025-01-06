@@ -1,42 +1,15 @@
-W1226 14:11:45.803000 24684 site-packages\torch\distributed\elastic\multiprocessing\redirects.py:29] NOTE: Redirects are currently not supported in Windows or MacOs.
+Not using distributed mode
+Creating dataset...
 Traceback (most recent call last):
-  File "<frozen runpy>", line 198, in _run_module_as_main
-  File "<frozen runpy>", line 88, in _run_code
-  File "C:\Users\user1\miniconda3\Lib\site-packages\torch\distributed\run.py", line 923, in <module>
+  File "/home/seoyun/PromptMRG/main_train.py", line 142, in <module>
     main()
-  File "C:\Users\user1\miniconda3\Lib\site-packages\torch\distributed\elastic\multiprocessing\errors\__init__.py", line 355, in wrapper
-    return f(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^
-  File "C:\Users\user1\miniconda3\Lib\site-packages\torch\distributed\run.py", line 919, in main
-    run(args)
-  File "C:\Users\user1\miniconda3\Lib\site-packages\torch\distributed\run.py", line 910, in run
-    elastic_launch(
-  File "C:\Users\user1\miniconda3\Lib\site-packages\torch\distributed\launcher\api.py", line 138, in __call__
-    return launch_agent(self._config, self._entrypoint, list(args))
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\user1\miniconda3\Lib\site-packages\torch\distributed\launcher\api.py", line 260, in launch_agent
-    result = agent.run()
-             ^^^^^^^^^^^
-  File "C:\Users\user1\miniconda3\Lib\site-packages\torch\distributed\elastic\metrics\api.py", line 137, in wrapper
-    result = f(*args, **kwargs)
-             ^^^^^^^^^^^^^^^^^^
-  File "C:\Users\user1\miniconda3\Lib\site-packages\torch\distributed\elastic\agent\server\api.py", line 696, in run
-    result = self._invoke_run(role)
-             ^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\user1\miniconda3\Lib\site-packages\torch\distributed\elastic\agent\server\api.py", line 849, in _invoke_run
-    self._initialize_workers(self._worker_group)
-  File "C:\Users\user1\miniconda3\Lib\site-packages\torch\distributed\elastic\metrics\api.py", line 137, in wrapper
-    result = f(*args, **kwargs)
-             ^^^^^^^^^^^^^^^^^^
-  File "C:\Users\user1\miniconda3\Lib\site-packages\torch\distributed\elastic\agent\server\api.py", line 668, in _initialize_workers
-    self._rendezvous(worker_group)
-  File "C:\Users\user1\miniconda3\Lib\site-packages\torch\distributed\elastic\metrics\api.py", line 137, in wrapper
-    result = f(*args, **kwargs)
-             ^^^^^^^^^^^^^^^^^^
-  File "C:\Users\user1\miniconda3\Lib\site-packages\torch\distributed\elastic\agent\server\api.py", line 500, in _rendezvous
-    rdzv_info = spec.rdzv_handler.next_rendezvous()
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\user1\miniconda3\Lib\site-packages\torch\distributed\elastic\rendezvous\static_tcp_rendezvous.py", line 67, in next_rendezvous
-    self._store = TCPStore(  # type: ignore[call-arg]
-                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-RuntimeError: use_libuv was requested but PyTorch was build without libuv support
+  File "/home/seoyun/PromptMRG/main_train.py", line 89, in main
+    train_dataset, val_dataset, test_dataset = create_dataset('generation_%s'%args.dataset_name, tokenizer, args)
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/seoyun/PromptMRG/dataset/__init__.py", line 38, in create_dataset
+    train_dataset = generation_train(transform_train, args.image_dir, args.ann_path, tokenizer, dataset='medpix', args=args)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/seoyun/PromptMRG/dataset/medical_dataset.py", line 44, in __init__
+    self.annotation = json.load(open(os.path.join(ann_root),'r'))
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'data/medpix_annotation_promptmrg.json'
