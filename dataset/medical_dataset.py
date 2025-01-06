@@ -49,7 +49,7 @@ class generation_train(Dataset):
         self.max_words = max_words      
         self.dataset = dataset
         self.args = args
-        with open('./data/mimic_cxr/clip_text_features.json', 'r') as f:
+        with open(f'./data/{dataset}/clip_text_features.json', 'r') as f:
             self.clip_features = np.array(json.load(f))
         
     def __len__(self):
