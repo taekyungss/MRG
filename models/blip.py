@@ -9,6 +9,7 @@ from models.resnet import blip_resnet
 import torch
 from torch import nn
 import torch.nn.functional as F
+import numpy as np
 
 from models.transformer import Transformer
 
@@ -91,7 +92,11 @@ class BLIP_Decoder(nn.Module):
         cls_preds = self.cls_head(avg_embeds)
         cls_preds = cls_preds.view(-1, 4, 18)
         # logit adjustment
-        cls_preds[:, 1, :] += torch.log(torch.from_numpy(base_probs)).view(1, -1).to(image.device)
+
+        base_probs = np.clip(base_probs, 1e-6, None)
+        log_base_probs = torch.log(torch.from_numpy(base_probs)).view(1, -1).to(image.device)
+        cls_preds[:, 1, :] += log_base_probs
+
         loss_cls = criterion_cls(cls_preds, cls_labels)
         
         text = self.tokenizer(caption, padding='longest', truncation=True, return_tensors="pt").to(image.device)

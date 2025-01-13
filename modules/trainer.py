@@ -167,7 +167,12 @@ class Trainer(BaseTrainer):
             logits = np.sum(logits, 0)
             counts = np.sum(counts, 0)
             logits = logits / counts
-            logits /= np.max(logits)
+            
+            max_logits = np.max(logits)
+            if max_logits == 0:
+                max_logits = 1e-6  # 최대값이 0일 경우 최소값으로 대체
+            logits /= max_logits
+
             logits = np.append(logits, [1,1,1,1]) # 4 auxiliary diseases
             #######
             self.base_probs = logits # update class distribution
