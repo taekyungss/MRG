@@ -13,6 +13,14 @@ result/promptmrg/model_promptmrg_20240305 (1).pth
 checkpoints/stanford/chexbert/chexbert.pth
 data/mimic_cxr/mimic_annotation_promptmrg.json
 data/mimic_cxr/clip_text_features.json
+data/mimic_cxr/df_train.csv
+data/mimic_cxr/df_val.csv
+data/mimic_cxr/data.csv
+data/mimic_cxr/mimic-cxr.csv
+data/mimic_cxr/test
+data/mimic_cxr/train
+data/mimic_cxr/valid
+
 # C extensions
 *.so
 
