@@ -166,6 +166,9 @@ class Trainer(BaseTrainer):
             counts = np.concatenate(counts, axis=0)
             logits = np.sum(logits, 0)
             counts = np.sum(counts, 0)
+            
+            counts = [1 if value == 0 else value for value in counts] # 값이 0인 경우, 1로 대체
+            
             logits = logits / counts
             
             max_logits = np.max(logits)
