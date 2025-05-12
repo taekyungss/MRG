@@ -1,5 +1,8 @@
 # PromptMRG
 
+### We reproduced the PromptMRG training/validation code !!
+
+
 Code of AAAI 2024 paper: "PromptMRG: Diagnosis-Driven Prompts for Medical Report Generation".
 
 ## Installation
